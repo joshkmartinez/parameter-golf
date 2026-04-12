@@ -1,16 +1,16 @@
 # GDN-Hybrid + Sliding Window Attention + compressed-code warmdown1000 (cold-cache 3-seed mean 1.01671233 BPB)
 
-Joshua-owned SAFE_SUBMISSION confirmation run for the repaired GDN-Hybrid family, reconciled from pulled TensorPool artifacts for `run051-safe031` / `j-bunuyb7fxu`.
+Three-seed confirmation run for the repaired GDN-Hybrid family, reconciled from pulled TensorPool artifacts for `run051-safe031` / `j-bunuyb7fxu`.
 
 ## Headline result
 
-- **SAFE_SUBMISSION authority:** `quantized_bpb`
+- **Submission authority:** `quantized_bpb`
 - **3-seed mean:** **1.01671233 BPB**
 - **3-seed std:** **0.00134386 BPB**
 - **Best seed:** **1.015700 BPB** (`seed 1337`)
 - **Worst seed:** `1.018237 BPB` (`seed 2024`)
 - **Artifact size range:** `15,713,422` to `15,903,365` bytes
-- **Legality lane:** **SAFE_SUBMISSION** — fixed-predictor / no-TTT Track-A; all pulled artifacts stayed below the `16,000,000` byte cap
+- **Legality:** fixed-predictor / no-TTT Track-A; all pulled artifacts stayed below the `16,000,000` byte cap
 
 ## Per-seed authoritative results
 
@@ -24,9 +24,9 @@ Joshua-owned SAFE_SUBMISSION confirmation run for the repaired GDN-Hybrid family
 
 ## Why this matters
 
-- Improves Joshua's prior staged 3-seed SAFE_SUBMISSION artifact `run039-safe019` (**1.01710033 BPB**) by **0.00038800 BPB** while also reducing the worst-case artifact size from **15,981,262** to **15,903,365** bytes.
+- Improves the prior 3-seed artifact `run039-safe019` (**1.01710033 BPB**) by **0.00038800 BPB** while also reducing the worst-case artifact size from **15,981,262** to **15,903,365** bytes.
 - Confirms that the compressed-code warmdown1000 repair generalizes cleanly across a fresh 3-seed cold-cache confirmation run rather than only a single hard-seed probe.
-- Preserves the strongest Joshua-owned clean-lane architecture family with materially better mean BPB than the current upstream Joshua PR #1564.
+- Preserves the strongest version of this clean fixed-predictor GDN-Hybrid family so far.
 
 ## Technique stack
 
@@ -39,7 +39,7 @@ Joshua-owned SAFE_SUBMISSION confirmation run for the repaired GDN-Hybrid family
 
 ## Legality notes
 
-This record is **SAFE_SUBMISSION** because the scored artifact is a fixed int6 model with **no TTT, no SLOT, no RLS, and no eval-time adaptation**. The pulled logs show all three serialized artifacts below the 16 MB cap. XSA telemetry is reported for completeness, but the submission authority for this lane remains `quantized_bpb` from the pulled artifacts.
+This record uses a fixed int6 model with **no TTT, no SLOT, no RLS, and no eval-time adaptation**. The pulled logs show all three serialized artifacts below the 16 MB cap. XSA telemetry is reported for completeness, but the submission authority remains `quantized_bpb` from the pulled artifacts.
 
 ## Provenance
 
