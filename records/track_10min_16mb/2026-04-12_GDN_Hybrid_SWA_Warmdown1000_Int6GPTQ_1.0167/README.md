@@ -1,20 +1,14 @@
-# GDN-Hybrid + Sliding Window Attention + Warmdown1000 + Int6 GPTQ (3-seed mean val_bpb 1.01671233)
+# GDN-Hybrid + Sliding Window Attention + Warmdown1000 + Int6 GPTQ
 
-- 3-seed mean val_bpb: 1.01671233
-- 3-seed std (sample): 0.00134386
-- Best seed val_bpb: 1.015700 (seed 1337)
-- Worst seed val_bpb: 1.018237 (seed 2024)
-- Counted artifact size range: 15,740,145 to 15,930,088 bytes
+Status: code patched for the SentencePiece byte-accounting bug identified on PR #1576. The previously reported val_bpb values from the original run051-safe031 logs were computed with the buggy LUT and are not authoritative for this staged submission folder.
 
-## Per-seed authoritative results
+## Current status
 
-| Seed | Steps | EMA val_bpb | Quantized val_bpb | XSA val_bpb | Counted artifact bytes |
-|------|------:|------------:|------------------:|------------:|-----------------------:|
-| 42 | 2227 | 1.007164 | 1.016200 | 1.021202 | 15,760,602 |
-| 1337 | 2242 | 1.007164 | 1.015700 | 1.020105 | 15,930,088 |
-| 2024 | 2227 | 1.009032 | 1.018237 | 1.024111 | 15,740,145 |
-| Mean | — | 1.007787 | 1.01671233 | 1.021806 | 15,810,278.33 |
-| Std (sample) | — | — | 0.00134386 | — | — |
+- Fixed issue: SentencePiece byte LUT no longer double-counts leading-space bytes for ▁-prefixed tokens.
+- Affected metric: val_bpb in the original logs and metadata.
+- Current authoritative val_bpb: pending corrected re-score from the saved run051-safe031 artifacts.
+- Training legality lane remains unchanged: fixed predictor, no TTT, no SLOT, no RLS in the scored artifact.
+- Artifact-size evidence remains unchanged: all three saved model artifacts are under the 16,000,000-byte cap even when counted with local code bytes.
 
 ## Technique stack
 
@@ -23,6 +17,14 @@
 3. MuonEq-R + AdamW training mix, EMA 0.997, late QAT threshold 0.15, and warmdown=1000.
 4. Int6 GPTQ quantization with zstd-22 compression for the final model artifact.
 5. Self-contained record packaging: train_gpt.py plus local dependencies (architectures.py, configs.py, requirements.txt) all live in this record folder and compile from within the folder.
-6. Submission authority is the pulled quantized val_bpb values above. XSA telemetry is included for completeness only.
 
-All three seeds stayed below the 16,000,000-byte counted artifact cap and hit the 590s wallclock stop used for the 10-minute track. This submission is intended as a clean fixed-predictor record with quantized val_bpb as the submission metric.
+## Saved artifact evidence from run051-safe031
+
+- seed 42 artifact bytes: 15,733,879
+- seed 1337 artifact bytes: 15,903,365
+- seed 2024 artifact bytes: 15,713,422
+- counted artifact totals including local code bytes remain below 16,000,000 bytes for all three seeds.
+
+## Notes
+
+This folder is now staged as a corrected-code submission candidate, not a final score claim. Before any upstream submission or PR update, the quantized val_bpb must be recomputed with the patched byte-accounting logic and the submission metadata/log summary must be refreshed from that corrected evaluation.
