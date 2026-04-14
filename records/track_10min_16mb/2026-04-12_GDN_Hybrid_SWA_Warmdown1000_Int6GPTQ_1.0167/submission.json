@@ -1,32 +1,38 @@
 {
   "name": "GDN-Hybrid + Sliding Window Attention + Warmdown1000 + Int6 GPTQ",
-  "val_bpb": null,
-  "bytes_total": 15930088,
-  "blurb": "SP1024 GDN-Hybrid fixed-predictor run with Sliding Window Attention, warmdown=1000, and int6 GPTQ. The original run051-safe031 val_bpb was computed with a buggy SentencePiece byte-accounting LUT; code is patched here and corrected val_bpb is pending re-score from saved artifacts.",
+  "val_bpb": 1.19671450,
+  "bytes_total": 15930173,
+  "blurb": "SP1024 GDN-Hybrid fixed-predictor run with Sliding Window Attention, warmdown=1000, and int6 GPTQ. Corrected 3-seed mean val_bpb 1.19671450 from TensorPool re-evaluation of the saved run051-safe031 int6 artifacts after fixing the SentencePiece byte-accounting bug.",
   "author": "Joshua Martinez",
   "github_id": "joshkmartinez",
   "date": "2026-04-12",
   "base_pr": 1545,
-  "val_bpb_method": "quantized_bpb_pending_corrected_rescore",
+  "val_bpb_method": "quantized_bpb_corrected_sentencepiece_lut",
+  "re_eval_job": {
+    "job_id": "j-cc0ro8n61o",
+    "cluster": "c-8fb7887u9z",
+    "source_run": "run051-safe031"
+  },
   "seeds": {
     "42": {
-      "val_bpb": null,
-      "bytes_total": 15760602,
-      "steps": 2227
+      "val_bpb": 1.19611126,
+      "xsa_val_bpb": 1.20199938,
+      "bytes_total": 15760687
     },
     "1337": {
-      "val_bpb": null,
-      "bytes_total": 15930088,
-      "steps": 2242
+      "val_bpb": 1.19552275,
+      "xsa_val_bpb": 1.20070722,
+      "bytes_total": 15930173
     },
     "2024": {
-      "val_bpb": null,
-      "bytes_total": 15740145,
-      "steps": 2227
+      "val_bpb": 1.19850950,
+      "xsa_val_bpb": 1.20542323,
+      "bytes_total": 15740230
     }
   },
-  "mean_bpb": null,
-  "std_bpb": null,
+  "mean_bpb": 1.19671450,
+  "xsa_mean_bpb": 1.20270994,
+  "code_bytes": 26808,
   "architecture": "SP1024 GDN-Hybrid ([GDN×5] -> SWA -> [GDN×5] -> SWA_shared), MuonEq-R + AdamW, EMA 0.997, warmdown=1000, int6 GPTQ + zstd-22, self-contained record packaging.",
   "compliance": {
     "artifact_under_16mb": true,
@@ -36,6 +42,6 @@
     "no_slot": true,
     "no_rls": true,
     "three_seeds": true,
-    "corrected_val_bpb_pending": true
+    "corrected_val_bpb_confirmed": true
   }
 }

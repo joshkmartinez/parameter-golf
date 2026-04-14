@@ -1,0 +1,6 @@
+mean quantized val_bpb: 1.19671450
+mean XSA val_bpb: 1.20270994
+max counted bytes_total: 15930173
+seed 42: quantized_val_bpb=1.19611126 xsa_val_bpb=1.20199938 counted_bytes_total=15760687
+seed 1337: quantized_val_bpb=1.19552275 xsa_val_bpb=1.20070722 counted_bytes_total=15930173
+seed 2024: quantized_val_bpb=1.19850950 xsa_val_bpb=1.20542323 counted_bytes_total=15740230

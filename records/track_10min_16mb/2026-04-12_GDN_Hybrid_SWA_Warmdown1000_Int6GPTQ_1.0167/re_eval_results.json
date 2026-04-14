@@ -1,0 +1,37 @@
+{
+  "name": "GDN-Hybrid + Sliding Window Attention + Warmdown1000 + Int6 GPTQ",
+  "source_run": "run051-safe031",
+  "source_artifacts": [
+    "final_model_D_GDN_Hybrid_seed42.int6.ptz",
+    "final_model_D_GDN_Hybrid_seed1337.int6.ptz",
+    "final_model_D_GDN_Hybrid_seed2024.int6.ptz"
+  ],
+  "val_bpb": 1.1967145016826464,
+  "val_bpb_method": "quantized_bpb_corrected_sentencepiece_lut",
+  "xsa_val_bpb_mean": 1.2027099430246004,
+  "bytes_total": 15930173,
+  "code_bytes": 26808,
+  "seed_results": [
+    {
+      "seed": 42,
+      "quantized_val_bpb": 1.1961112599750967,
+      "xsa_val_bpb": 1.2019993787725656,
+      "artifact_bytes": 15733879,
+      "counted_bytes_total": 15760687
+    },
+    {
+      "seed": 1337,
+      "quantized_val_bpb": 1.1955227456067197,
+      "xsa_val_bpb": 1.20070721587109,
+      "artifact_bytes": 15903365,
+      "counted_bytes_total": 15930173
+    },
+    {
+      "seed": 2024,
+      "quantized_val_bpb": 1.198509499466123,
+      "xsa_val_bpb": 1.2054232344301459,
+      "artifact_bytes": 15713422,
+      "counted_bytes_total": 15740230
+    }
+  ]
+}

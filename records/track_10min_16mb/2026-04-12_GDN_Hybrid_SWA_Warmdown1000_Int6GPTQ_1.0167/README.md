@@ -1,14 +1,22 @@
-# GDN-Hybrid + Sliding Window Attention + Warmdown1000 + Int6 GPTQ
+# GDN-Hybrid + Sliding Window Attention + Warmdown1000 + Int6 GPTQ (corrected 3-seed mean val_bpb 1.19671450)
 
-Status: code patched for the SentencePiece byte-accounting bug identified on PR #1576. The previously reported val_bpb values from the original run051-safe031 logs were computed with the buggy LUT and are not authoritative for this staged submission folder.
+This record was re-evaluated after fixing the SentencePiece byte-accounting bug identified on PR #1576. The authoritative val_bpb values below come from a fresh TensorPool re-evaluation job (`run055-reeval-gdn-bpbfix`) over the saved run051-safe031 int6 artifacts, using the corrected canonical LUT logic.
 
-## Current status
+- Corrected 3-seed mean val_bpb: 1.19671450
+- Corrected 3-seed mean XSA val_bpb: 1.20270994
+- Best corrected quantized val_bpb: 1.19552275 (seed 1337)
+- Worst corrected quantized val_bpb: 1.19850950 (seed 2024)
+- Counted artifact size range: 15,740,230 to 15,930,173 bytes
+- Re-eval TensorPool job: j-cc0ro8n61o on cluster c-8fb7887u9z (completed successfully)
 
-- Fixed issue: SentencePiece byte LUT no longer double-counts leading-space bytes for ▁-prefixed tokens.
-- Affected metric: val_bpb in the original logs and metadata.
-- Current authoritative val_bpb: pending corrected re-score from the saved run051-safe031 artifacts.
-- Training legality lane remains unchanged: fixed predictor, no TTT, no SLOT, no RLS in the scored artifact.
-- Artifact-size evidence remains unchanged: all three saved model artifacts are under the 16,000,000-byte cap even when counted with local code bytes.
+## Corrected authoritative results
+
+| Seed | Quantized val_bpb | XSA val_bpb | Counted artifact bytes |
+|------|------------------:|------------:|-----------------------:|
+| 42 | 1.19611126 | 1.20199938 | 15,760,687 |
+| 1337 | 1.19552275 | 1.20070722 | 15,930,173 |
+| 2024 | 1.19850950 | 1.20542323 | 15,740,230 |
+| Mean | 1.19671450 | 1.20270994 | 15,810,363.33 |
 
 ## Technique stack
 
@@ -17,14 +25,10 @@ Status: code patched for the SentencePiece byte-accounting bug identified on PR 
 3. MuonEq-R + AdamW training mix, EMA 0.997, late QAT threshold 0.15, and warmdown=1000.
 4. Int6 GPTQ quantization with zstd-22 compression for the final model artifact.
 5. Self-contained record packaging: train_gpt.py plus local dependencies (architectures.py, configs.py, requirements.txt) all live in this record folder and compile from within the folder.
+6. Submission authority is the corrected quantized val_bpb values above. XSA telemetry is included for completeness only.
 
-## Saved artifact evidence from run051-safe031
+## Important provenance note
 
-- seed 42 artifact bytes: 15,733,879
-- seed 1337 artifact bytes: 15,903,365
-- seed 2024 artifact bytes: 15,713,422
-- counted artifact totals including local code bytes remain below 16,000,000 bytes for all three seeds.
+The included `train_seed42.log`, `train_seed1337.log`, and `train_seed2024.log` files are the original run051-safe031 training logs and therefore still contain the pre-fix buggy BPB printouts. They remain useful as training/wallclock provenance, but they are not the source of truth for submission metrics.
 
-## Notes
-
-This folder is now staged as a corrected-code submission candidate, not a final score claim. Before any upstream submission or PR update, the quantized val_bpb must be recomputed with the patched byte-accounting logic and the submission metadata/log summary must be refreshed from that corrected evaluation.
+The authoritative corrected metric provenance is the TensorPool re-evaluation of the saved `.ptz` artifacts from run051-safe031. See the accompanying `re_eval_results.json` and `re_eval_summary.txt` files for the corrected scorer outputs.
