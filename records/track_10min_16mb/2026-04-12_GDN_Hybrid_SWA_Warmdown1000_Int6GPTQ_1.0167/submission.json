@@ -1,0 +1,40 @@
+{
+  "name": "GDN-Hybrid + Sliding Window Attention + Warmdown1000 + Int6 GPTQ",
+  "val_bpb": 1.01671233,
+  "bytes_total": 15930088,
+  "blurb": "SP1024 GDN-Hybrid fixed-predictor run with Sliding Window Attention, warmdown=1000, and int6 GPTQ. Three-seed mean val_bpb 1.01671233 across seeds 42/1337/2024, with all counted artifacts under the 16,000,000-byte cap.",
+  "author": "Joshua Martinez",
+  "github_id": "joshkmartinez",
+  "date": "2026-04-12",
+  "base_pr": 1545,
+  "val_bpb_method": "quantized_bpb",
+  "seeds": {
+    "42": {
+      "val_bpb": 1.016200,
+      "bytes_total": 15760602,
+      "steps": 2227
+    },
+    "1337": {
+      "val_bpb": 1.015700,
+      "bytes_total": 15930088,
+      "steps": 2242
+    },
+    "2024": {
+      "val_bpb": 1.018237,
+      "bytes_total": 15740145,
+      "steps": 2227
+    }
+  },
+  "mean_bpb": 1.01671233,
+  "std_bpb": 0.00134386,
+  "architecture": "SP1024 GDN-Hybrid ([GDN×5] -> SWA -> [GDN×5] -> SWA_shared), MuonEq-R + AdamW, EMA 0.997, warmdown=1000, int6 GPTQ + zstd-22, self-contained record packaging.",
+  "compliance": {
+    "artifact_under_16mb": true,
+    "training_under_600s": true,
+    "fixed_predictor": true,
+    "no_ttt": true,
+    "no_slot": true,
+    "no_rls": true,
+    "three_seeds": true
+  }
+}
