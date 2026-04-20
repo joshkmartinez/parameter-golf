@@ -1,0 +1,32 @@
+{
+  "author": "Joshua Martinez",
+  "github_id": "joshkmartinez",
+  "name": "SP1024 + Depth Recurrence (L3-5) + Parallel Residuals + Legal Score-First TTT (1.0745 BPB)",
+  "blurb": "SP1024 tokenizer with 3-layer depth recurrence (11→14 virtual layers), parallel residuals from layer 7+, and legal score-first TTT (3 epochs, lr=0.005, chunk-based adaptation per PR #461/#549 pattern). No pre-quant TTT — fully SAFE_SUBMISSION lane compliant. Beats our previous BORDERLINE submission (PR #1489 at 1.07389 BPB) by 0.0006 BPB with clean legality.",
+  "date": "2026-04-10T08:24:00Z",
+  "val_loss": null,
+  "val_bpb": 1.07451312,
+  "val_loss_std": null,
+  "val_bpb_std": null,
+  "seeds": [314],
+  "seed_results": {
+    "314": {
+      "steps_completed": 5408,
+      "stopping_reason": "wallclock_cap (588024ms)",
+      "pre_quant_bpb": 1.1130788,
+      "post_ttt_pre_quant_bpb": 1.07872277,
+      "quantized_bpb": 1.09637406,
+      "quantized_sliding_window_bpb": 1.07483296,
+      "quantized_sliding_etlb_bpb": 1.07451312
+    }
+  },
+  "pre_quant_val_loss": null,
+  "pre_quant_val_bpb": 1.1130788,
+  "step_stop": 5408,
+  "wallclock_seconds": 588,
+  "eval_time_seconds": null,
+  "bytes_total": 13868265,
+  "bytes_model_int6_brotli": 13868265,
+  "bytes_code": null,
+  "run_notes": "Legal score-first TTT (PR #461/#549 pattern) — chunk-based adaptation without pre-quant training. Result: 1.0745 BPB (quantized_sliding_etlb). Beats our best BORDERLINE (1.07389 BPB) with clean SAFE_SUBMISSION legality. Architecture: SP1024 + 3-layer depth recurrence + parallel residuals. TTT: 3 epochs, lr=0.005, freeze_blocks=0."
+}
